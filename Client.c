@@ -1,13 +1,11 @@
 #include <stdio.h> 
 #include <sys/socket.h> 
-
 #include <stdlib.h> 
 #include <netinet/in.h> 
-
-#include <string.h>
-#include <unistd.h>
-
-#define PORT 5132 
+#include <string.h> 
+#include <unistd.h> 
+#include <arpa/inet.h>
+#define PORT 5132
    
 int main(int argc, char const *argv[]) 
 { 
@@ -27,15 +25,21 @@ int main(int argc, char const *argv[])
     serv_addr.sin_family = AF_INET; 
     serv_addr.sin_port = htons(PORT); 
        
-    
+    // Convert IPv4 and IPv6 addresses from text to binary form 
+    if(inet_pton(AF_INET, "192.168.153.133", &serv_addr.sin_addr)<=0)  
+    { 
+        printf("\Invaliad address/ Address not supported \n"); 
+        return -1; 
+    } 
+   
     if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) 
     { 
-        printf("\n Annyeonghasaeyo ^__^ \n"); 
+        printf("\Connection unsuccessful \n"); 
         return -1; 
     } 
     send(sock , hello , strlen(hello) , 0 ); 
-    printf("Hello message sent\n"); 
-    valread = read ( sock , buffer, 1024); 
+    printf("Anneyongsayongg\n"); 
+    valread = read( sock , buffer, 1024); 
     printf("%s\n",buffer ); 
     return 0; 
 } 
