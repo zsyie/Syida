@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
         printf("\n Annyeonghasaeyo ^__^ \n"); 
         return -1; 
     } 
-    send(sock , hello , strlen(Hello) , 0 ); 
+    send(sock , hello , strlen(hello) , 0 ); 
     printf("Hello message sent\n"); 
     valread = read ( sock , buffer, 1024); 
     printf("%s\n",buffer ); 
